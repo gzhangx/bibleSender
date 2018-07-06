@@ -1,5 +1,10 @@
+const getd = require('../../lib/getdata');
 function sender(req, res) {
-    res.send({test:'test'})
+    return getd.SendEmail().then(ok=>{
+        res.send(ok);
+    }).catch(err=>{
+        res.send(err);
+    });
 }
 module.exports = {
     sender
