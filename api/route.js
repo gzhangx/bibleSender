@@ -1,10 +1,14 @@
 const keys = require('lodash/keys');
 const sender = require('./controllers/sender');
 const routes = {
-  '/getToday' : {
-      method: 'get',
-      func: sender.sender
-  }
+    '/getToday': {
+        method: 'get',
+        func: sender.sender
+    },
+    '/showWeek': {
+        method: 'get',
+        func: sender.showWeek
+    }
 };
 
 module.exports = {
