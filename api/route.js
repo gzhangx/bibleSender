@@ -1,7 +1,7 @@
 const keys = require('lodash/keys');
 const sender = require('./controllers/sender');
 const routes = {
-    '/getToday': {
+    '/sendToday': {
         method: 'get',
         func: sender.sender
     },
