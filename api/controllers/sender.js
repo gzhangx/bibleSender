@@ -1,5 +1,6 @@
 const getd = require('../../lib/getdata');
 function sender(req, res) {
+	console.log(`sending daily email ${new Date()}`);
     return getd.sendEmail().then(ok=>{
         res.send(ok);
     }).catch(err=>{
@@ -9,6 +10,7 @@ function sender(req, res) {
 
 
 function showWeek(req, res) {
+	console.log(`show weekly verse ${new Date()}`);
     const {week, subject} = getd.getWeek();
     const r = week.slice(1).map(wk=> {
         const bold = wk === subject;
