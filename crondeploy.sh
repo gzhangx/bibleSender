@@ -1,1 +1,1 @@
-gloud app deploy cron.yaml
+gcloud app deploy cron.yaml
