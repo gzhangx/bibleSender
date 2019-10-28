@@ -9,6 +9,10 @@ const routes = {
         method: 'get',
         func: sender.sendSheetNotice,
     },
+    '/sendSantury' : {
+        method: 'get',
+        func: sender.sendSantury,
+    },
     '/showWeek': {
         method: 'get',
         func: sender.showWeek
