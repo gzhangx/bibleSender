@@ -5,6 +5,10 @@ const routes = {
         method: 'get',
         func: sender.sender
     },
+    '/sendSheet' : {
+        method: 'get',
+        func: sender.sendSheetNotice,
+    },
     '/showWeek': {
         method: 'get',
         func: sender.showWeek

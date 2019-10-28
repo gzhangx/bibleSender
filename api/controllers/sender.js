@@ -1,4 +1,5 @@
 const getd = require('../../lib/getdata');
+const getNotice = require('../../lib/getNotice');
 function sender(req, res) {
 	console.log(`sending daily email ${new Date()}`);
     return getd.sendEmail().then(ok=>{
@@ -21,7 +22,17 @@ function showWeek(req, res) {
     res.sendRaw(r);
 }
 
+function sendSheetNotice(req, res) {
+    console.log(`sending sheet ${new Date()}`);
+    return getNotice.checkSheetNotice().then(ok=>{
+        res.send(ok);
+    }).catch(err=>{
+        res.send(err);
+    });
+}
+
 module.exports = {
     sender,
     showWeek,
+    sendSheetNotice,
 };
