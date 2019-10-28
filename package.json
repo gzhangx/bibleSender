@@ -12,11 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.15",
     "mailgun": "^0.5.0",
-    "mailgun-js": "^0.20.0",
-    "moment-timezone": "^0.5.21",
-    "restify": "^7.2.1"
+    "mailgun-js": "^0.22.0",
+    "moment-timezone": "^0.5.27",
+    "restify": "^8.4.0"
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
@@ -31,8 +31,8 @@
     }
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "2.2.1",
-    "ava": "0.25.0",
+    "@google-cloud/nodejs-repo-tools": "^3.3.0",
+    "ava": "^2.4.0",
     "supertest": "3.0.0"
   },
   "engines": {
