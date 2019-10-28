@@ -1,19 +1,20 @@
-var api_key = 'key-b9cc4c7cfe07d033dd507d4b1c89e635';
-var domain = 'mail.veda-inc.com';
-var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
- 
-var data = {
-  from: 'gzhangx@hotmail.com',
-  to: ['gzhangx@hotmail.com','gzhangx@hotmail.com'],
-  subject: 'Hello',
-  text: 'Testing some Mailgun awesomeness!'
-};
- 
-mailgun.messages().send(data, function (error, body) {
-  console.log(body);
-});
+const sheet = require('./lib/getSheet');
+sheet.getSheet({
+  TOKEN_PATH: 'token.txt',
+  sheetInfo: {
+    spreadsheetId: '1H1GmNPXZBwdT2AWvPDJFZKy3LOvfERXoREgvPJ-HUsI',
+    range: `'2019 1-3'!A:K`,
+  }
+}).then(res=>console.log(res))
+return;
+const mail = require('./lib/nodemailer');
 
-
+mail.sendGmail({
+  from: '"HebrewsBot" <gzhangx@gmail.com>',
+  to:'gzhangx@hotmail.com',
+  subject:'testsub1',
+  text:'testtext2'
+})
 return;
 const t = require('./lib/getdata');
 t.SendEmail().then(d=>{
