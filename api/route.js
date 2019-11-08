@@ -16,6 +16,10 @@ const routes = {
     '/showWeek': {
         method: 'get',
         func: sender.showWeek
+    },
+    '/version': {
+        method: 'get',
+        func: sender.version
     }
 };
 

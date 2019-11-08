@@ -1,6 +1,7 @@
 const getd = require('../../lib/getdata');
 const getNotice = require('../../lib/getNotice');
 const sendSanturyReminder = require('../../lib/sendSanturyReminder');
+const ver = require('../../version');
 function sender(req, res) {
 	console.log(`sending daily email ${new Date()}`);
     return getd.sendEmail().then(ok=>{
@@ -41,9 +42,16 @@ function sendSantury(req, res) {
     });
 }
 
+function version(req, res) {
+    const date = new Date();
+    console.log(`version ${date}`);
+    return res.send(ver);    
+}
+
 module.exports = {
     sender,
     showWeek,
     sendSheetNotice,
     sendSantury,
+    version,
 };
