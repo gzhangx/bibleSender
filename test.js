@@ -1,3 +1,10 @@
+function test() {
+  const testSendWeeklyNotice = require('./lib/getNotice');
+  testSendWeeklyNotice.test(-1);
+}
+
+return test();
+
 const sheet = require('./lib/getSheet');
 sheet.getSheet({
   TOKEN_PATH: 'token.txt',
