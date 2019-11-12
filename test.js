@@ -1,6 +1,6 @@
 function test() {
   const testSendWeeklyNotice = require('./lib/getNotice');
-  testSendWeeklyNotice.test(-1);
+  testSendWeeklyNotice.test(0);
 }
 
 return test();
