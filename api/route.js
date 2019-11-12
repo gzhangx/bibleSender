@@ -5,9 +5,9 @@ const routes = {
         method: 'get',
         func: sender.sender
     },
-    '/sendSheet' : {
+    '/sendHebrewsWeeklyEmail' : {
         method: 'get',
-        func: sender.sendSheetNotice,
+        func: sender.sendHebrewsWeeklyEmail,
     },
     '/sendSantury' : {
         method: 'get',

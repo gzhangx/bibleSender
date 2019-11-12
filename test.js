@@ -1,5 +1,5 @@
 function test() {
-  const testSendWeeklyNotice = require('./lib/getNotice');
+  const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
   testSendWeeklyNotice.test(0);
 }
 
