@@ -1,5 +1,5 @@
 const getd = require('../../lib/getdata');
-const sendHebrewsWeeklyEmail = require('../../lib/sendHebrewsWeeklyEmail');
+const sendHebrewsWeeklyEmailLib = require('../../lib/sendHebrewsWeeklyEmail');
 const sendSanturyReminder = require('../../lib/sendSanturyReminder');
 const ver = require('../../version');
 function sender(req, res) {
@@ -25,8 +25,8 @@ function showWeek(req, res) {
 }
 
 function sendHebrewsWeeklyEmail(req, res) {
-    console.log(`sending sheet ${new Date()}`);
-    return sendHebrewsWeeklyEmail.checkSheetNotice().then(ok=>{
+    console.log(`sending sendHebrewsWeeklyEmail ${new Date()}`);
+    return sendHebrewsWeeklyEmailLib.checkSheetNotice().then(ok=>{
         res.send(ok);
     }).catch(err=>{
         res.send(err);
