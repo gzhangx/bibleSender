@@ -20,6 +20,10 @@ const routes = {
     '/version': {
         method: 'get',
         func: sender.version
+    },
+    '/': {
+        method: 'get',
+        func: sender.version
     }
 };
 
