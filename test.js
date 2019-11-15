@@ -2,7 +2,7 @@ function test() {
   //const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
   //testSendWeeklyNotice.test(0);
   const sendSan = require('./lib/sendSanturyReminder');
-  sendSan.checkSanturyNotice();
+  sendSan.checkSanturyNotice(new Date(), false);
 }
 
 return test();
