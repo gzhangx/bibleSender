@@ -1,6 +1,7 @@
 const getd = require('../../lib/getdata');
 const sendHebrewsWeeklyEmailLib = require('../../lib/sendHebrewsWeeklyEmail');
 const sendSanturyReminder = require('../../lib/sendSanturyReminder');
+const acccn = require('../../lib/youtubeacccn');
 const ver = require('../../version');
 function sender(req, res) {
 	console.log(`sending daily email ${new Date()}`);
@@ -42,6 +43,32 @@ function sendSantury(req, res) {
     });
 }
 
+function handleErr(res, err) {
+    const txt = get(err,'response.text');
+    console.log(txt);
+    res.send(txt);
+}
+function checkVideo(req, res) {
+    console.log(`video id ${req.query.id}`);
+    return acccn.recordAcccnVideoViewCount(req.query.id).then(async ret=>{
+        const maxInf = await acccn.getAndSetAcccnAttendenceNumber(ret.count);
+        res.send(Object.assign(ret, maxInf));
+    }).catch(err=>{
+        handleErr(res,err);
+    });
+}
+
+function checkChannel(req, res) {
+    const id = req.query.id || 'UCgoGuFymG8WrD_3dBEg3Lqw';
+    console.log(`channel id ${id}`);
+    return acccn.recordAcccnVideoViewCountByChannel(id).then(async ret=>{
+        const maxInf = await acccn.getAndSetAcccnAttendenceNumber(ret.count);
+        res.send(Object.assign(ret, maxInf));
+    }).catch(err=>{
+        handleErr(res,err);
+    })
+}
+
 function version(req, res) {
     const date = new Date();
     console.log(`version ${date}`);
@@ -49,6 +76,8 @@ function version(req, res) {
 }
 
 module.exports = {
+    checkVideo,
+    checkChannel,
     sender,
     showWeek,
     sendHebrewsWeeklyEmail,

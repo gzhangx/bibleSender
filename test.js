@@ -5,16 +5,18 @@ function test() {
   sendSan.checkSanturyNotice(new Date(), false);
 }
 
-return test();
+//return test();
 
 const sheet = require('./lib/getSheet');
 sheet.getSheet({
   TOKEN_PATH: 'token.txt',
   sheetInfo: {
     spreadsheetId: '1H1GmNPXZBwdT2AWvPDJFZKy3LOvfERXoREgvPJ-HUsI',
-    range: `'2019 1-3'!A:K`,
+    range: `'2020 1-3'!A:K`,
   }
-}).then(res=>console.log(res))
+}).then(res=>{
+  console.log(res)
+})
 return;
 const mail = require('./lib/nodemailer');
 

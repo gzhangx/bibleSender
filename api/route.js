@@ -17,6 +17,14 @@ const routes = {
         method: 'get',
         func: sender.showWeek
     },
+    '/checkVideo': {
+        method: 'get',
+        func: sender.checkVideo
+    },
+    '/checkChannel': {
+        method: 'get',
+        func: sender.checkChannel
+    },
     '/version': {
         method: 'get',
         func: sender.version
