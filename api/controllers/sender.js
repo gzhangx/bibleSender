@@ -1,3 +1,4 @@
+const get = require('lodash/get');
 const getd = require('../../lib/getdata');
 const sendHebrewsWeeklyEmailLib = require('../../lib/sendHebrewsWeeklyEmail');
 const sendSanturyReminder = require('../../lib/sendSanturyReminder');
