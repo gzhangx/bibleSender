@@ -2,6 +2,7 @@ const restify = require('restify');
 const route = require('./api/route');
 
 const server = restify.createServer();
+server.use(restify.plugins.queryParser());
 route.route(server);
 
 const port = process.env.PORT || 8080;
