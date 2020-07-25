@@ -3,6 +3,7 @@ const route = require('./api/route');
 
 const server = restify.createServer();
 server.use(restify.plugins.queryParser());
+server.use(restify.plugins.bodyParser());
 route.route(server);
 
 const port = process.env.PORT || 8080;

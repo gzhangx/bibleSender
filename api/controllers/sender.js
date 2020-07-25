@@ -4,6 +4,7 @@ const sendHebrewsWeeklyEmailLib = require('../../lib/sendHebrewsWeeklyEmail');
 const sendSanturyReminder = require('../../lib/sendSanturyReminder');
 const acccn = require('../../lib/youtubeacccn');
 const ver = require('../../version');
+const { appendSheet } = require('../../lib/getSheet');
 function sender(req, res) {
 	console.log(`sending daily email ${new Date()}`);
     return getd.sendEmail().then(ok=>{
@@ -70,6 +71,24 @@ function checkChannel(req, res) {
     })
 }
 
+function saveFunTypingRecord(req, res) {
+    if (!req.body) {
+        return res.send({ err: "no body" });    
+    }
+    const { name, username, wpm } = req.body;
+    if (!name) {
+        return res.send({ err: "no name" });    
+    }
+    if (!username) {
+        return res.send({ err: "no username" });
+    }
+    return appendSheet('1fcSgz1vEh5I3NS5VXCx1BHitD_AAQrmUCXNJPPSyDYk', `'Sheet1'!A1`, [[new Date(), username, name, wpm]]).then(resok => {
+        res.send({ ok: resok });
+    }).catch(exc => {
+        return res.send(exc);  
+    })    
+}
+
 function version(req, res) {
     const date = new Date();
     console.log(`version ${date}`);
@@ -83,5 +102,6 @@ module.exports = {
     showWeek,
     sendHebrewsWeeklyEmail,
     sendSantury,
+    saveFunTypingRecord,
     version,
 };

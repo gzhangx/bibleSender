@@ -25,6 +25,10 @@ const routes = {
         method: 'get',
         func: sender.checkChannel
     },
+    '/saveFunTypingRecord': {
+        method: 'post',
+        func: sender.saveFunTypingRecord,
+    },
     '/version': {
         method: 'get',
         func: sender.version
