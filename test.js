@@ -8,15 +8,7 @@ function test() {
 //return test();
 
 const sheet = require('./lib/getSheet');
-sheet.getSheet({
-  TOKEN_PATH: 'token.txt',
-  sheetInfo: {
-    spreadsheetId: '1H1GmNPXZBwdT2AWvPDJFZKy3LOvfERXoREgvPJ-HUsI',
-    range: `'2020 1-3'!A:K`,
-  }
-}).then(res=>{
-  console.log(res)
-})
+sheet.appendSheet('1fcSgz1vEh5I3NS5VXCx1BHitD_AAQrmUCXNJPPSyDYk', `'Sheet1'!A1`,[[new Date(),'ZZ']]);
 return;
 const mail = require('./lib/nodemailer');
 
