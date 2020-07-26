@@ -48,7 +48,11 @@ const routes = {
 
 module.exports = {
     route: server => {
-        
+        server.opts("/*", function (req, res, next) {
+            addCORS(req, res);
+            res.send(200);
+            return next();
+        });
         server.use((req, res, next) => {
             if (req.method !== 'GET' && req.method !== 'POST') return next();
             addCORS(req, res);
