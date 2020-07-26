@@ -53,7 +53,7 @@ module.exports = {
             if (req.method !== 'GET' && req.method !== 'POST') return next();
             addCORS(req, res);
             const controller = routes[req.url];
-            if (controller && controller.auth !== false) {
+            if (controller && controller.auth) {
                 if (!req.user) {
                     res.send(401, 'Unauthorized');
                     return next(false);
