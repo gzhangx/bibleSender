@@ -80,9 +80,15 @@ function saveFunTypingRecord(req, res) {
         return res.send({ err: "no name" });    
     }
     if (!userName) {
-        return res.send({ err: "no userName" });
+        //return res.send({ err: "no userName" });
     }
-    return appendSheet('1fcSgz1vEh5I3NS5VXCx1BHitD_AAQrmUCXNJPPSyDYk', `'Sheet1'!A1`, [[new Date(), userName, name, wpm, wordCount, verseCount]]).then(resok => {
+    console.log(`save for ${userName} ${name} wpm=${wpm} wordCount=${wordCount} verseCount=${verseCount}`);
+    const maskUsername = nm => {
+        const parts = nm.split('@');
+        parts[0] = parts[0].substr(0, 2) + '###';
+        return parts.join('@');
+    }
+    return appendSheet('1fcSgz1vEh5I3NS5VXCx1BHitD_AAQrmUCXNJPPSyDYk', `'Sheet1'!A1`, [[new Date(), maskUsername(userName), name, wpm, wordCount, verseCount]]).then(resok => {
         res.send({ ok: resok });
     }).catch(exc => {
         return res.send(exc);  
