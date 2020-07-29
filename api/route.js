@@ -36,6 +36,10 @@ const routes = {
         method: 'post',
         func: sender.saveFunTypingRecord,
     },
+    '/sendGJEmails': {
+        method: 'post',
+        func: sender.sendGJEmails,
+    },
     '/version': {
         method: 'get',
         func: sender.version

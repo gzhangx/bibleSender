@@ -5,6 +5,7 @@ const sendSanturyReminder = require('../../lib/sendSanturyReminder');
 const acccn = require('../../lib/youtubeacccn');
 const ver = require('../../version');
 const { appendSheet } = require('../../lib/getSheet');
+const mail = require('../../lib/nodemailer');
 function sender(req, res) {
 	console.log(`sending daily email ${new Date()}`);
     return getd.sendEmail().then(ok=>{
@@ -95,6 +96,25 @@ function saveFunTypingRecord(req, res) {
     })    
 }
 
+function sendGJEmails(req, res) {
+    if (!req.body) {
+        return res.send({ err: "no body" });
+    }
+    const { subject, text } = req.body;
+    if (!subject || !text) {
+        return res.send({ err: "no subject or text" });
+    }
+    const to = ['funtyping@googlegroups.com','gzhangx@hotmail.com'];
+    return mail.sendGmail({
+        from: '"GGBot" <gzhangx@gmail.com>',
+        to,
+        subject,
+        text
+    }).then(inf => {
+        return res.send({ message: "ok" });
+    });
+}
+
 function version(req, res) {
     const date = new Date();
     console.log(`version ${date}`);
@@ -109,5 +129,6 @@ module.exports = {
     sendHebrewsWeeklyEmail,
     sendSantury,
     saveFunTypingRecord,
+    sendGJEmails,
     version,
 };
