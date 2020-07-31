@@ -5,8 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "e2e": "repo-tools test deploy",
-    "test": "repo-tools test app",
     "cover": "nyc --cache npm test; nyc report --reporter=html"
   },
   "author": "",
@@ -20,11 +18,7 @@
     "nodemailer": "^6.4.11",
     "restify": "^8.5.1"
   },
-  "devDependencies": {
-    "ava": "^3.11.0",
-    "extend": ">=3.0.2",
-    "supertest": "4.0.2"
-  },
+  "devDependencies": {},
   "engines": {
     "node": "12.x.x"
   }
