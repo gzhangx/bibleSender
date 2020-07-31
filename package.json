@@ -12,12 +12,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "googleapis": "^54.1.0",
+    "googleapis": "^58.0.0",
     "lodash": "^4.17.19",
     "mailgun": "^0.5.0",
     "mailgun-js": "^0.22.0",
     "moment-timezone": "^0.5.31",
-    "nodemailer": "^6.4.10",
+    "nodemailer": "^6.4.11",
     "restify": "^8.5.1"
   },
   "cloud-repo-tools": {
@@ -33,8 +33,7 @@
     }
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.3.0",
-    "ava": "^3.10.1",
+    "ava": "^3.11.0",
     "extend": ">=3.0.2",
     "supertest": "4.0.2"
   },
