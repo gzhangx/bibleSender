@@ -20,18 +20,6 @@
     "nodemailer": "^6.4.11",
     "restify": "^8.5.1"
   },
-  "cloud-repo-tools": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true,
-    "test": {
-      "app": {
-        "args": [
-          "app.js"
-        ],
-        "msg": "Hello, world!"
-      }
-    }
-  },
   "devDependencies": {
     "ava": "^3.11.0",
     "extend": ">=3.0.2",
