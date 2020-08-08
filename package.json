@@ -16,7 +16,8 @@
     "mailgun-js": "^0.22.0",
     "moment-timezone": "^0.5.31",
     "nodemailer": "^6.4.11",
-    "restify": "^8.5.1"
+    "restify": "^8.5.1",
+    "superagent": "^5.3.1"
   },
   "devDependencies": {},
   "engines": {
