@@ -32,7 +32,8 @@ function sendHebrewsWeeklyEmail(req, res) {
     console.log(`sending sendHebrewsWeeklyEmail ${new Date()}`);
     return sendHebrewsWeeklyEmailLib.checkSheetNotice().then(ok=>{
         res.send(ok);
-    }).catch(err=>{
+    }).catch(err => {
+        console.log(err);
         res.send(err);
     });
 }
