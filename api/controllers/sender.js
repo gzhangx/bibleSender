@@ -65,9 +65,8 @@ function checkVideo(req, res) {
 function checkChannel(req, res) {
     const id = req.query.id || 'UCgoGuFymG8WrD_3dBEg3Lqw';
     console.log(`channel id ${id}`);
-    return acccn.recordAcccnVideoViewCountByChannel(id).then(async ret=>{
-        const maxInf = await acccn.getAndSetAcccnAttendenceNumber(ret.count);
-        res.send(Object.assign(ret, maxInf));
+    return acccn.recordAcccnYoutubeCntAll(id).then(async ret=>{        
+        res.send(ret);
     }).catch(err=>{
         handleErr(res,err);
     })
