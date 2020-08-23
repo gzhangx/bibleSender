@@ -4,7 +4,7 @@ const sendHebrewsWeeklyEmailLib = require('../../lib/sendHebrewsWeeklyEmail');
 const sendSanturyReminder = require('../../lib/sendSanturyReminder');
 const acccn = require('../../lib/youtubeacccn');
 const ver = require('../../version');
-const { appendSheet } = require('../../lib/getSheet');
+const sheet = require('../../lib/getSheet');
 const mail = require('../../lib/nodemailer');
 function sender(req, res) {
 	console.log(`sending daily email ${new Date()}`);
@@ -90,7 +90,7 @@ function saveFunTypingRecord(req, res) {
         parts[0] = parts[0].substr(0, 2) + '###';
         return parts.join('@');
     }
-    return appendSheet('1fcSgz1vEh5I3NS5VXCx1BHitD_AAQrmUCXNJPPSyDYk', `'Sheet1'!A1`, [[new Date(), maskUsername(userName), name, wpm, wordCount, verseCount]]).then(resok => {
+    return sheet.appendSheet('1fcSgz1vEh5I3NS5VXCx1BHitD_AAQrmUCXNJPPSyDYk', `'Sheet1'!A1`, [[new Date(), maskUsername(userName), name, wpm, wordCount, verseCount]]).then(resok => {
         res.send({ ok: resok });
     }).catch(exc => {
         return res.send(exc);  
@@ -116,6 +116,21 @@ function sendGJEmails(req, res) {
     });
 }
 
+function getSheetAuthUrl(req, res) {
+    const url = sheet.getSheetAuthUrl();
+    res.send({ url });
+}
+
+function authorizeWithCode(req, res) {
+    const code = req.query.code;
+    console.log(`authorizeWithCode ${code}`);
+    return sheet.authorizeWithCode(code).then(() => {
+        res.send('done');
+    }).catch(err => {
+        res.send(err);
+    })
+}
+
 function version(req, res) {
     const date = new Date();
     console.log(`version ${date}`);
@@ -131,5 +146,7 @@ module.exports = {
     sendSantury,
     saveFunTypingRecord,
     sendGJEmails,
+    getSheetAuthUrl,
+    authorizeWithCode,
     version,
 };

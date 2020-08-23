@@ -44,6 +44,14 @@ const routes = {
         method: 'get',
         func: sender.version
     },
+    '/getSheetAuthUrl': {
+        method: 'get',
+        func: sender.getSheetAuthUrl
+    },
+    '/authorizeWithCode': {
+        method: 'get',
+        func: sender.authorizeWithCode
+    },
     '/': {
         method: 'get',
         func: sender.version
