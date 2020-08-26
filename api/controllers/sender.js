@@ -38,6 +38,16 @@ function sendHebrewsWeeklyEmail(req, res) {
     });
 }
 
+function testHebrewWeekelyEmail(req,res) {
+    console.log(`test sending sendHebrewsWeeklyEmail ${new Date()}`);
+    return sendHebrewsWeeklyEmailLib.checkSheetNotice(new Date(), false).then(ok => {
+        res.send(ok);
+    }).catch(err => {
+        console.log(err);
+        res.send(err);
+    });
+}
+
 function sendSantury(req, res) {
     console.log(`sending santury ${new Date()}`);
     return sendSanturyReminder.checkSanturyNotice().then(ok=>{
@@ -142,6 +152,7 @@ module.exports = {
     sender,
     showWeek,
     sendHebrewsWeeklyEmail,
+    testHebrewWeekelyEmail,
     sendSantury,
     saveFunTypingRecord,
     sendGJEmails,

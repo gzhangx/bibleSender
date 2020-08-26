@@ -16,6 +16,10 @@ const routes = {
         method: 'get',
         func: sender.sendHebrewsWeeklyEmail,
     },
+    '/testHebrewWeekelyEmail': {
+        method: 'get',
+        func: sender.testHebrewWeekelyEmail,
+    },
     '/sendSantury' : {
         method: 'get',
         func: sender.sendSantury,
