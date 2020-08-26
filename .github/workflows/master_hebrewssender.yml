@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'hebrewssender'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_2ed6e9889ee34b248abea2140f23028f }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_1563093f41494ba1a51c655e43e64265 }}
         package: .
