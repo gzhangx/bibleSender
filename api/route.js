@@ -10,11 +10,13 @@ function addCORS(req, res) {
 const routes = {
     '/sendToday': {
         method: 'get',
-        func: sender.sender
+        func: sender.sender,
+        schedule: '1 * * * *',
     },
     '/sendHebrewsWeeklyEmail' : {
         method: 'get',
         func: sender.sendHebrewsWeeklyEmail,
+        schedule: '0 0 * * 2,5',
     },
     '/testHebrewWeekelyEmail': {
         method: 'get',
@@ -23,6 +25,7 @@ const routes = {
     '/sendSantury' : {
         method: 'get',
         func: sender.sendSantury,
+        schedule: '0 0 15,28 * *',
     },
     '/showWeek': {
         method: 'get',
@@ -34,7 +37,8 @@ const routes = {
     },
     '/checkChannel': {
         method: 'get',
-        func: sender.checkChannel
+        func: sender.checkChannel,
+        schedule: '0/5 9-12 * * *',
     },
     '/saveFunTypingRecord': {
         method: 'post',
