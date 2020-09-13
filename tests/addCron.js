@@ -19,7 +19,7 @@ const allCronStr=[cronStart].concat(hasScheduleKeyNames.map(name => {
 const execStr=`(${allCronStr}) | crontab - `;
 console.log(execStr);
 
-const crontab = spawn('crontab',['-l'],{
+const crontab = spawn('crontab',['-'],{
     stdio: ['pipe',process.stdout,process.steerr]
 });
 
@@ -28,8 +28,14 @@ const crontab = spawn('crontab',['-l'],{
 async function main() {
     
     for(let i=0; i<allCronStr.length; i++) {
-        await crontab.stdin.write(allCronStr[i]);
+        try {
+        console.log(allCronStr[i]);
+        await crontab.stdin.write(allCronStr[i]+'\n');
+        } catch(e) {
+         console.log(e);
+        }
     }
+    crontab.stdin.end();
     console.log('### DONE');
 }
 main();
