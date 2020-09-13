@@ -1,5 +1,6 @@
 const routs=require('../api/route');
 const keys=require('lodash/keys');
+const {exec}=require("child_process");
 
 const allRoutes=routs.getRoutes();
 const allKeys=keys(allRoutes);
@@ -14,4 +15,18 @@ const allCronStr=[cronStart].concat(hasScheduleKeyNames.map(name => {
     const r=allRoutes[name];
     return `${r.schedule} ${nodeName} ${programDir}/tests/execCron.js ${name} > ${logsDir}/${name.replace('/','')}.log`;
 })).map(s => `echo "${s}"; `).join('');
-console.log(`(${allCronStr}) | crontab - `);
+
+const execStr=`(${allCronStr}) | crontab - `;
+console.log(execStr);
+
+exec(execStr,(error,stdout,stderr) => {
+    if(error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if(stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(stdout);
+});
