@@ -12,6 +12,6 @@ const logsDir=`${homeDir}/logs`;
 const cronStart=`@reboot ${nodeName} ${programDir}/index.js > ${logsDir}/bs.log &`;
 const allCronStr=[cronStart].concat(hasScheduleKeyNames.map(name => {
     const r=allRoutes[name];
-    return `${r.schedule} ${nodeName} ${programDir}/tests/execCron.js ${name} > ${logsDir}/${name}.log`;
+    return `${r.schedule} ${nodeName} ${programDir}/tests/execCron.js ${name} > ${logsDir}/${name.replace('/','')}.log`;
 })).map(s => `echo "${s}"; `).join('');
 console.log(`(${allCronStr}) | crontab - `);
