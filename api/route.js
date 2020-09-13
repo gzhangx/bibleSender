@@ -7,7 +7,7 @@ function addCORS(req, res) {
     res.header("Access-Control-Allow-Headers", req.header("Access-Control-Request-Headers"));
 }
 
-const routes = {
+const getRoutes = ()=> ({
     '/sendToday': {
         method: 'get',
         func: sender.sender,
@@ -64,9 +64,10 @@ const routes = {
         method: 'get',
         func: sender.version
     }
-};
+});
 
-module.exports = {
+module.exports={
+    getRoutes,
     route: server => {
         server.opts("/*", function (req, res, next) {
             addCORS(req, res);
@@ -86,6 +87,7 @@ module.exports = {
             return next();
         }); 
         
+        const routes = getRoutes();
         const rts = keys(routes);
         rts.forEach(url=>{
             const op = routes[url];
