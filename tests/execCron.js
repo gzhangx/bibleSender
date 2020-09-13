@@ -12,4 +12,4 @@ const res={
 }
 
 console.log(`doning ${execName}`);
-routes[`/${execName}`].func(req,res);
+routes[execName].func(req,res);
