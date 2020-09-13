@@ -38,7 +38,7 @@ const getRoutes = ()=> ({
     '/checkChannel': {
         method: 'get',
         func: sender.checkChannel,
-        schedule: '0/5 9-12 * * *',
+        schedule: '0/5 9-12 * * 0',
     },
     '/saveFunTypingRecord': {
         method: 'post',
