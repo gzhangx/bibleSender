@@ -10,8 +10,7 @@ const nodeName='/usr/local/bin/node';
 const homeDir='/home/pi';
 const programDir=`${homeDir}/bibleSender`;
 const logsDir=`${homeDir}/logs`;
-const cronStart=`@reboot ${nodeName} ${programDir}/index.js > ${logsDir}/bs.log &`;
-const allCronStr=[cronStart].concat(hasScheduleKeyNames.map(name => {
+const allCronStr=(hasScheduleKeyNames.map(name => {
     const r=allRoutes[name];
     return `${r.schedule} ${nodeName} ${programDir}/tests/execCron.js ${name} > ${logsDir}/${name.replace('/','')}.log`;
 }));
