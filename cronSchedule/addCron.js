@@ -12,7 +12,7 @@ const programDir=`${homeDir}/bibleSender`;
 const logsDir=`${homeDir}/logs`;
 const allCronStr=(hasScheduleKeyNames.map(name => {
     const r=allRoutes[name];
-    return `${r.schedule} ${nodeName} ${programDir}/tests/execCron.js ${name} > ${logsDir}/${name.replace('/','')}.log`;
+    return `${r.schedule} ${programDir}/cronSchedule/doCron.sh ${name}`;
 }));
 
 const execStr=`(${allCronStr}) | crontab - `;
