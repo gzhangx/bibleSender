@@ -1,1 +1,0 @@
-sudo cp bibleSender.service /etc/systemd/system
