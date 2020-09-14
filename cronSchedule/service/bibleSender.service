@@ -1,0 +1,14 @@
+[Unit]
+Description=bibleSender
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/node /home/pi/bibleSender/index.js > /home/pi/logs/bs.log &
+WorkingDirectory=/home/pi/bibleSender
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
