@@ -4,7 +4,7 @@ const sendHebrewsWeeklyEmailLib = require('../../lib/sendHebrewsWeeklyEmail');
 const sendSanturyReminder = require('../../lib/sendSanturyReminder');
 const acccn = require('../../lib/youtubeacccn');
 const ver = require('../../version');
-const sheet = require('../../lib/getSheet');
+const sheet = require('../../lib/getSheet').createSheet();
 const mail = require('../../lib/nodemailer');
 function sender(req, res) {
 	console.log(`sending daily email ${new Date()}`);
