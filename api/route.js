@@ -11,7 +11,7 @@ const getRoutes = ()=> ({
     '/sendToday': {
         method: 'get',
         func: sender.sender,
-        schedule: '1 * * * *',
+        schedule: '1 1 * * *',
     },
     '/sendHebrewsWeeklyEmail' : {
         method: 'get',
