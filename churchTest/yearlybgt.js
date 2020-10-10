@@ -1,14 +1,15 @@
-const sheet=require('../lib/getSheet');
+const sheet=require('../lib/getSheet').createSheet();
 const fs=require('fs');
 const Promise=require('bluebird');
+const { SSL_OP_NETSCAPE_CA_DN_BUG }=require('constants');
 const ids=JSON.parse(fs.readFileSync('sec.json'));
 
 const toField=str => str.charCodeAt(0)-'A'.charCodeAt(0);
 async function getChurchData(myData) {
     const sheetId=ids.churchBudgetId;
-    const dt=await sheet.createSheet().readSheet(sheetId, `'2021 Budget'!A:P`);
+    const dt=await sheet.readSheet(sheetId, `'2021 Budget'!A:P`);
     //console.log(dt.data.values);
-    const budgetData=dt.data.values.reduce((acc, line) => {
+    const budgetData=dt.data.values.reduce((acc, line, curInd) => {
         const subCode=line[toField('A')];
         const description=line[toField('B')];
         const expCode=line[toField('G')]||'';
@@ -20,6 +21,7 @@ async function getChurchData(myData) {
         } else if (!acc.end) {
             if (subCode.trim()) {
                 acc.lines.push({
+                    curInd,
                     subCode,
                     description,
                     expCode,
@@ -34,12 +36,18 @@ async function getChurchData(myData) {
         lines: [],
     }).lines.slice(1);    
 
-    budgetData.forEach(itm => {
+    const updateRanges=budgetData.reduce((acc, itm) => {
         const myItem=myData.sum[itm.expCode];
         if (myItem) {
             myItem.found=true;
             console.log(`${itm.expCode.padEnd(10)} church=${itm.amount.toFixed(2).padStart(10)} me=${myItem.amount.toFixed(2).padStart(10)} ${itm.description}`);
+            if (acc.min>itm.curInd) acc.min=itm.curInd;
+            if (acc.max<itm.curInd) acc.max=itm.curInd;
         }
+        return acc;
+    }, {
+        min: 9999,
+        max: 0,
     });
 
     myData.order.forEach(name => {
@@ -50,18 +58,32 @@ async function getChurchData(myData) {
     });
 
 
-    budgetData.forEach(itm => {
+    console.log("writting to church-------------------");
+    console.log(updateRanges);
+    const updateItemsCnt=updateRanges.max-updateRanges.min+1;
+    const updateData=budgetData.reduce((acc, itm) => {
         const myItem=myData.sum[itm.expCode];
+        const ind=itm.curInd-updateRanges.min;
         if (myItem) {
-            myItem.found=true;
-            console.log(`${itm.expCode.padEnd(10)} church=${itm.amount.toFixed(2).padStart(10)} me=${myItem.amount.toFixed(2).padStart(10)} ${itm.description}`);
+            console.log(`${itm.curInd} ${itm.expCode.padEnd(10)} church=${itm.amount.toFixed(2).padStart(10)} me=${myItem.amount.toFixed(2).padStart(10)} ${itm.description}`);
+            acc[ind]=[null, null];
+            if (itm.amount!==myItem.amount) {
+                acc[ind][0]=`Amount Diff ${myItem.amount.toFixed(2)}`;
+            }
+            acc[ind][1]=myItem.history;
+        } else {
+            if (ind>=0&&ind<updateItemsCnt) {
+                //acc[ind]=['', ''];
+            }
         }
-    });
+        return acc;
+    }, new Array(updateItemsCnt));
+    console.log(updateData);
 }
 
 
 async function getMyData() {
-    const dt=await sheet.createSheet().readSheet(ids.myBugetId, `'Sheet1'!A:I`);
+    const dt=await sheet.readSheet(ids.myBugetId, `'Sheet1'!A:I`);
     const localData=dt.data.values.reduce((acc, line) => {
         const subCode=line[toField('C')];
         const description=line[toField('E')];
