@@ -1,6 +1,6 @@
 const sheet=require('../lib/getSheet').createSheet();
 const fs=require('fs');
-const Promise=require('bluebird');
+const moment=require('moment');
 const { SSL_OP_NETSCAPE_CA_DN_BUG }=require('constants');
 const ids=JSON.parse(fs.readFileSync('sec.json'));
 
@@ -66,19 +66,22 @@ async function getChurchData(myData) {
         const ind=itm.curInd-updateRanges.min;
         if (myItem) {
             console.log(`${itm.curInd} ${itm.expCode.padEnd(10)} church=${itm.amount.toFixed(2).padStart(10)} me=${myItem.amount.toFixed(2).padStart(10)} ${itm.description}`);
-            acc[ind]=[null, null];
+            acc[ind]=['', ''];
             if (itm.amount!==myItem.amount) {
                 acc[ind][0]=`Amount Diff ${myItem.amount.toFixed(2)}`;
+            } else {
+                acc[ind][0]=myItem.amount;
             }
             acc[ind][1]=myItem.history;
         } else {
             if (ind>=0&&ind<updateItemsCnt) {
-                //acc[ind]=['', ''];
+                acc[ind]=[``, ''];
             }
         }
         return acc;
     }, new Array(updateItemsCnt));
     console.log(updateData);
+    await sheet.updateSheet(sheetId, `'2021 Budget'!I${updateRanges.min+1}:J${updateRanges.max+1}`, updateData);
 }
 
 
@@ -89,7 +92,7 @@ async function getMyData() {
         const description=line[toField('E')];
         const expCode=line[toField('D')];
         const amount=parseFloat(line[toField('B')]);
-        const date=line[toField('A')];
+        const date=moment(line[toField('A')]).toDate();
         acc.push({
             subCode,
             description,
@@ -103,7 +106,7 @@ async function getMyData() {
 
     const sumed=localData.reduce((acc, itm) => {
         const found=acc.sum[itm.expCode];
-        const curHist=() => `${itm.date}:${itm.amount}`;
+        const curHist=() => `${moment(itm.date).format('MM/DD')}:$${itm.amount}`;
         if (!found) {
             acc.sum[itm.expCode]=
                 { ...itm, history: curHist() };
