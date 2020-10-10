@@ -3,15 +3,15 @@ const fs=require('fs');
 const ids=JSON.parse(fs.readFileSync('sec.json'));
 
 const toField=str => str.charCodeAt(0)-'A'.charCodeAt(0);
-async function getChurchData() {
+async function getChurchData(myData) {
     const sheetId=ids.churchBudgetId;
     const dt=await sheet.createSheet().readSheet(sheetId, `'2021 Budget'!A:P`);
     //console.log(dt.data.values);
-    const localData=dt.data.values.reduce((acc, line) => {
+    const budgetData=dt.data.values.reduce((acc, line) => {
         const subCode=line[toField('A')];
         const description=line[toField('B')];
-        const expCode=line[toField('G')];
-        const amount=line[toField('H')];
+        const expCode=line[toField('G')]||'';
+        const amount=parseFloat(line[toField('H')]||'0');
         if (!acc.start) {
             if (/Local Evangelism/.test(subCode)) {
                 acc.start=true;
@@ -31,30 +31,21 @@ async function getChurchData() {
         start: false,
         end: false,
         lines: [],
-    }).lines.slice(1).filter(x => x.amount).map(x => ({
-        ...x,
-        amount: parseFloat(x.amount),
-    }));
+    }).lines.slice(1);    
 
-
-    const sumed=localData.reduce((acc, itm) => {
-        if (!acc.sum[itm.expCode]) {
-            acc.sum[itm.expCode]=itm;
-            acc.order.push(itm.expCode);
-        } else {
-            acc.sum[itm.expCode].amount+=itm.amount;
+    budgetData.forEach(itm => {
+        if (myData.sum[itm.expCode]) {
+            myData.sum[itm.expCode].found=true;
+            console.log(`${itm.expCode.padEnd(10)} ${itm.amount.toFixed(2).padStart(10)} ${itm.description}`);
         }
-        return acc;
-    }, {
-        order: [],
-        sum: {},
     });
-    //console.log(sumed);
 
-    sumed.order.forEach(name => {
-        const itm=sumed.sum[name];
-        console.log(`${itm.expCode.padEnd(10)} ${itm.amount.toFixed(2).padStart(10)} ${itm.description}`);
-    })
+    myData.order.forEach(name => {
+        const itm=myData.sum[name];
+        if (!itm.found) {
+            console.log(`!!!!!! NOT FOUND ${itm.expCode.padEnd(10)} ${itm.amount.toFixed(2).padStart(10)} ${itm.description}`);
+        }
+    });
 }
 
 
@@ -98,13 +89,14 @@ async function getMyData() {
     sumed.order.forEach(name => {
         const itm=sumed.sum[name];
         console.log(`${itm.expCode.padEnd(10)} ${itm.amount.toFixed(2).padStart(10)} ${itm.description} ${itm.history}`);
-    })
+    });
+    return sumed;
 }
 
 async function test() {
-    await getMyData();
+    const myData=await getMyData();
     console.log('---------------------');
-    await getChurchData();
+    await getChurchData(myData);
 }
 
 test();
