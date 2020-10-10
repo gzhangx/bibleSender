@@ -1,9 +1,10 @@
 const sheet=require('../lib/getSheet');
-
+const fs=require('fs');
+const sheetId=JSON.parse(fs.readFileSync('sec.json')).bugetId;
 const toField=str => str.charCodeAt(0)-'A'.charCodeAt(0);
 async function getData() {
-    const dt=await sheet.createSheet().readSheet('sheeid', `'2021 Budget'!A:P`);
-    console.log(dt.data.values);
+    const dt=await sheet.createSheet().readSheet(sheetId, `'2021 Budget'!A:P`);
+    //console.log(dt.data.values);
     const localData=dt.data.values.reduce((acc, line) => {
         const subCode=line[toField('A')];
         const description=line[toField('B')];
@@ -46,7 +47,12 @@ async function getData() {
         order: [],
         sum: {},
     });
-    console.log(sumed);
+    //console.log(sumed);
+
+    sumed.order.forEach(name => {
+        const itm=sumed.sum[name];
+        console.log(`${itm.expCode.padEnd(10)} ${itm.amount.toFixed(2).padStart(10)} ${itm.description}`);
+    })
 }
 
 getData();
