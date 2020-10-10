@@ -1,5 +1,6 @@
 const sheet=require('../lib/getSheet');
 const fs=require('fs');
+const Promise=require('bluebird');
 const ids=JSON.parse(fs.readFileSync('sec.json'));
 
 const toField=str => str.charCodeAt(0)-'A'.charCodeAt(0);
@@ -34,9 +35,10 @@ async function getChurchData(myData) {
     }).lines.slice(1);    
 
     budgetData.forEach(itm => {
-        if (myData.sum[itm.expCode]) {
-            myData.sum[itm.expCode].found=true;
-            console.log(`${itm.expCode.padEnd(10)} ${itm.amount.toFixed(2).padStart(10)} ${itm.description}`);
+        const myItem=myData.sum[itm.expCode];
+        if (myItem) {
+            myItem.found=true;
+            console.log(`${itm.expCode.padEnd(10)} church=${itm.amount.toFixed(2).padStart(10)} me=${myItem.amount.toFixed(2).padStart(10)} ${itm.description}`);
         }
     });
 
@@ -44,6 +46,15 @@ async function getChurchData(myData) {
         const itm=myData.sum[name];
         if (!itm.found) {
             console.log(`!!!!!! NOT FOUND ${itm.expCode.padEnd(10)} ${itm.amount.toFixed(2).padStart(10)} ${itm.description}`);
+        }
+    });
+
+
+    budgetData.forEach(itm => {
+        const myItem=myData.sum[itm.expCode];
+        if (myItem) {
+            myItem.found=true;
+            console.log(`${itm.expCode.padEnd(10)} church=${itm.amount.toFixed(2).padStart(10)} me=${myItem.amount.toFixed(2).padStart(10)} ${itm.description}`);
         }
     });
 }
