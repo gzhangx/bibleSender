@@ -77,7 +77,7 @@ const getRoutes = ()=> ({
 
 module.exports={
     getRoutes,
-    route: server => {
+    route: (server, restify) => {
         server.opts("/*", function (req, res, next) {
             addCORS(req, res);
             res.send(200);
@@ -102,5 +102,9 @@ module.exports={
             const op = routes[url];
             server[op.method](url, op.func);
         });        
+
+        server.get('/build/*', restify.plugins.serveStatic({
+            directory: __dirname+'/../public/local-mission-web/'
+        }));
     }
 };
