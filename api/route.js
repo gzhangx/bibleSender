@@ -1,5 +1,6 @@
 const keys = require('lodash/keys');
 const sender = require('./controllers/sender');
+const localMission = require('./controllers/localmission');
 
 function addCORS(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -59,6 +60,14 @@ const getRoutes = ()=> ({
     '/authorizeWithCode': {
         method: 'get',
         func: sender.authorizeWithCode
+    },
+    '/localMission/getCategory': {
+        method: 'get',
+        func: localMission.getLmCategories,
+    },
+    '/localMission/emailExpense': {
+        method: 'post',
+        func: localMission.emailExpense,
     },
     '/': {
         method: 'get',
