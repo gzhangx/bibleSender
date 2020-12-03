@@ -1,0 +1,16 @@
+[Unit]
+Description=bibleSender
+After=network.target
+
+#log with journalctl -u bibleSender.service
+[Service]
+ExecStart=/usr/local/bin/node /home/pi/bibleSender/server.js 
+WorkingDirectory=/home/pi/bibleSender
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+Group=netdev
+
+[Install]
+WantedBy=multi-user.target
