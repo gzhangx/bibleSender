@@ -68,7 +68,7 @@ async function getChurchData(myData) {
             console.log(`${itm.curInd} ${itm.expCode.padEnd(10)} church=${itm.amount.toFixed(2).padStart(10)} me=${myItem.amount.toFixed(2).padStart(10)} ${itm.description}`);
             acc[ind]=['', ''];
             if (itm.amount!==myItem.amount) {
-                acc[ind][0]=`Amount Diff ${myItem.amount.toFixed(2)}`;
+                acc[ind][0]=`Actual LocalMission Amount: ${myItem.amount.toFixed(2)}`;
             } else {
                 acc[ind][0]=myItem.amount;
             }
@@ -86,7 +86,7 @@ async function getChurchData(myData) {
 
 
 async function getMyData() {
-    const dt=await sheet.readSheet(ids.myBugetId, `'Sheet1'!A:I`);
+    const dt=await sheet.readSheet(ids.myBugetId, `'LM2020'!A:I`);
     const localData=dt.data.values.reduce((acc, line) => {
         const subCode=line[toField('C')];
         const description=line[toField('E')];
