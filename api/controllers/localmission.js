@@ -5,13 +5,14 @@ function getLmCategories(req, res) {
 }
 
 function emailExpense(req, res) {
-    const { amount, payee, categary } = req.body;
+    const { amount, payee, categary, attachements } = req.body;
     console.log(`${amount} ${payee} ${categary}`);
     lm.submitFile({
         payeeName: payee,
         reimbursementCat: categary,
         amount: amount,
         description: `${payee} ${amount} ${categary}`,
+        attachements,
     }).then(() => {
         res.send({message: 'done'})
     })

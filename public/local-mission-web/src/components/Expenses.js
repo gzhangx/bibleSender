@@ -59,13 +59,13 @@ export function Expenses() {
                 if (files.filter(f => f.name === name).length) return;
                 const reader = new FileReader();
                 reader.onload = function () {
-                    const buffer = reader.result.toString('base64');
+                    const buffer = reader.result;                    
                     setFiles(files.concat({
                         name: e.target.value,
                         buffer,
                     }))
                 };
-                reader.readAsArrayBuffer(e.target.files[0]);
+                reader.readAsDataURL(e.target.files[0]);
             }}/>
             <Button variant="primary" onClick={() => {
                 emailExpense({ amount, payee, categary: curCategory, attachements: files });
