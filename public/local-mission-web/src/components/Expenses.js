@@ -8,6 +8,7 @@ export function Expenses() {
     const [amount, setAmount] = useState('');
     const [files, setFiles] = useState([]);
     const [doCC, setDoCC] = useState('');
+    const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
         getCategories().then(res => {
@@ -74,8 +75,12 @@ export function Expenses() {
                 };
                 reader.readAsDataURL(e.target.files[0]);
             }}/>
-            <Button variant="primary" onClick={() => {
-                emailExpense({ amount, payee, categary: curCategory, attachements: files, doCC });
+            <Button variant="primary" disabled={submitting} onClick={() => {
+                setSubmitting(true);
+                emailExpense({ amount, payee, categary: curCategory, attachements: files, doCC }).then(res => {
+                    console.log(res);
+                    setSubmitting(false);
+                })
             }}>
                 Submit
             </Button>
