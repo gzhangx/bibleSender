@@ -7,6 +7,7 @@ export function Expenses() {
     const [payee, setPayee] = useState('');
     const [amount, setAmount] = useState('');
     const [files, setFiles] = useState([]);
+    const [doCC, setDoCC] = useState('');
 
     useEffect(() => {
         getCategories().then(res => {
@@ -20,6 +21,12 @@ export function Expenses() {
     return <div>
         
         <Form>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>doCC</Form.Label>
+                <Form.Check checked={!!doCC} type="checkbox" onClick={() => {
+                    setDoCC(!doCC);
+                }} label="doCC" />
+            </Form.Group>
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Payee</Form.Label>
                 <Form.Control as="input" placeholder="Payee" value={payee} onChange={e => {
@@ -68,7 +75,7 @@ export function Expenses() {
                 reader.readAsDataURL(e.target.files[0]);
             }}/>
             <Button variant="primary" onClick={() => {
-                emailExpense({ amount, payee, categary: curCategory, attachements: files });
+                emailExpense({ amount, payee, categary: curCategory, attachements: files, doCC });
             }}>
                 Submit
             </Button>
