@@ -1,15 +1,16 @@
 const sheet = require('./lib/getSheet');
 const mail = require('./lib/nodemailer');
-return testEmail();
+//return testEmail();
 
 function test() {
-  //const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
+  const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
+  return testSendWeeklyNotice.initSheetData();
   //testSendWeeklyNotice.test(0);
   const sendSan = require('./lib/sendSanturyReminder');
   sendSan.checkSanturyNotice(new Date(), false);
 }
 
-//return test();
+return test();
 
 
 sheet.appendSheet('1fcSgz1vEh5I3NS5VXCx1BHitD_AAQrmUCXNJPPSyDYk', `'Sheet1'!A1`,[[new Date(),'ZZ']]);
