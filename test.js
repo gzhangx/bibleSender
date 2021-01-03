@@ -4,7 +4,8 @@ const mail = require('./lib/nodemailer');
 
 function test() {
   const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
-  return testSendWeeklyNotice.initSheetData();
+  return testSendWeeklyNotice.getNewSheetData();
+  //return testSendWeeklyNotice.initSheetData();
   //testSendWeeklyNotice.test(0);
   const sendSan = require('./lib/sendSanturyReminder');
   sendSan.checkSanturyNotice(new Date(), false);
