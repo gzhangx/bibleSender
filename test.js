@@ -1,5 +1,17 @@
 const sheet = require('./lib/getSheet');
 const mail = require('./lib/nodemailer');
+const moment = require('moment');
+const getData = require('./lib/getdata');
+
+function testDailyEmail() {
+  return getData.sendEmail({
+    now: moment('2021-03-27'),
+    scheduleFileName: './lib/scheduleJinlin.txt',
+    from: '"JY Daily Bible verse test" <gzhangx@gmail.com>',
+    to: 'gzhangx@hotmail.com,jinlinx@hotmail.com',
+  });
+}
+return testDailyEmail();
 //return testEmail();
 
 function test() {
