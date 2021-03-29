@@ -1,6 +1,6 @@
 //import { get } from 'superagent';
 
-const apiBase = 'http://192.168.1.40:8080';
+const apiBase = 'http://192.168.1.41:8080';
 //const apiBase='http://localhost:8080';
 const getUrl=path => `${apiBase}/localMission/${path}`;
 const request = require('superagent');
