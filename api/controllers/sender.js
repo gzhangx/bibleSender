@@ -6,13 +6,30 @@ const acccn = require('../../lib/youtubeacccn');
 const ver = require('../../version');
 const sheet = require('../../lib/getSheet').createSheet();
 const mail = require('../../lib/nodemailer');
-function sender(req, res) {
-	console.log(`sending daily email ${new Date()}`);
-    return getd.sendEmail().then(ok=>{
-        res.send(ok);
-    }).catch(err=>{
-        res.send(err);
-    });
+async function sender(req, res) {
+    console.log(`sending daily email ${new Date()}`);
+    let ok1 = null, ok2 = null;
+    let err1 = null, err2 = null;
+    try {
+        ok1 = await getd.sendEmail();
+        console.log(`First sent `);
+        console.log(ok1);
+    } catch (err) {
+        err1 = err;
+    }
+    try {
+        ok2 = await getd.sendEmail({
+            //now: moment('2021-03-27'),
+            scheduleFileName: './lib/scheduleJinlin.txt',
+            from: '"JY Daily Bible verse test" <gzhangx@gmail.com>',
+            to: 'gzhangx@hotmail.com,jinlinx@hotmail.com',
+        });
+        console.log(`second sent `);
+        console.log(ok2);
+    } catch (err) {
+        err2 = err;
+    }
+    res.send({ ok1, ok2, err1, err2 });    
 }
 
 
