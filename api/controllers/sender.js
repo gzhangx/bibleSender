@@ -6,6 +6,7 @@ const acccn = require('../../lib/youtubeacccn');
 const ver = require('../../version');
 const sheet = require('../../lib/getSheet').createSheet();
 const mail = require('../../lib/nodemailer');
+const creds = require('../../credentials.json');
 async function sender(req, res) {
     console.log(`sending daily email ${new Date()}`);
     let ok1 = null, ok2 = null;
@@ -18,11 +19,12 @@ async function sender(req, res) {
         err1 = err;
     }
     try {
+        console.log(`sending to ${creds.cjdailyBibleVerseEmail}`);
         ok2 = await getd.sendEmail({
             //now: moment('2021-03-27'),
             scheduleFileName: './lib/scheduleJinlin.txt',
             from: '"JY Daily Bible verse test" <gzhangx@gmail.com>',
-            to: 'gzhangx@hotmail.com,jinlinx@hotmail.com',
+            to: creds.cjdailyBibleVerseEmail,
         });
         console.log(`second sent `);
         console.log(ok2);

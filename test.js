@@ -7,8 +7,8 @@ function testDailyEmail() {
   return getData.sendEmail({
     now: moment('2021-03-27'),
     scheduleFileName: './lib/scheduleJinlin.txt',
-    from: '"JY Daily Bible verse test" <gzhangx@gmail.com>',
-    to: 'gzhangx@hotmail.com,jinlinx@hotmail.com',
+    from: '"JY Daily Bible verse test" <test@test.com>',
+    to: 'test@test.com',
   });
 }
 return testDailyEmail();
