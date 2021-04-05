@@ -4,8 +4,10 @@ const moment = require('moment');
 const getData = require('./lib/getdata');
 
 function testDailyEmail() {
+  const ret = getData.loadData(moment('2021-04-04'), './lib/schedule.txt');
+  return console.log(ret.data.split('\n').length);
   return getData.sendEmail({
-    now: moment('2021-03-27'),
+    now: moment('2021-04-04'),
     scheduleFileName: './lib/scheduleJinlin.txt',
     from: '"JY Daily Bible verse test" <test@test.com>',
     to: 'test@test.com',
