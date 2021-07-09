@@ -13,12 +13,12 @@ function testDailyEmail() {
     to: 'test@test.com',
   });
 }
-return testDailyEmail();
+//return testDailyEmail();
 //return testEmail();
 
 function test() {
   const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
-  return testSendWeeklyNotice.getNewSheetData();
+  return testSendWeeklyNotice.checkSheetNotice();
   //return testSendWeeklyNotice.initSheetData();
   //testSendWeeklyNotice.test(0);
   const sendSan = require('./lib/sendSanturyReminder');
