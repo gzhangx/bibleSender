@@ -16,9 +16,11 @@ function testDailyEmail() {
 //return testDailyEmail();
 //return testEmail();
 
-function test() {
+async function test() {
   const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
-  return testSendWeeklyNotice.checkSheetNotice();
+  const msg = await testSendWeeklyNotice.checkSheetNotice(new Date(), false);
+  console.log(msg);
+  return;
   //return testSendWeeklyNotice.initSheetData();
   //testSendWeeklyNotice.test(0);
   const sendSan = require('./lib/sendSanturyReminder');
