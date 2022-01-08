@@ -25,11 +25,3 @@ jobs:
         npm install
         npm run build --if-present
         npm run test --if-present
-
-    - name: 'Deploy to Azure Web App'
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'hebrewssender'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_1563093f41494ba1a51c655e43e64265 }}
-        package: .
