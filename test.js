@@ -6,6 +6,20 @@ const acccn = require('./lib/youtubeacccn');
 const gsDirect = require('./lib/googleSheetDirect');
 
 const credentials = require('./credentials.json');
+
+async function test() {
+  const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
+  const msg = await testSendWeeklyNotice.checkSheetNotice(new Date(), false);
+  console.log(msg);
+  return;
+  //return testSendWeeklyNotice.initSheetData();
+  //testSendWeeklyNotice.test(0);
+  const sendSan = require('./lib/sendSanturyReminder');
+  sendSan.checkSanturyNotice(new Date(), false);
+}
+
+return test();
+
 async function testyoutube() {
   /*
   const today = moment(new Date()).startOf('day');
@@ -55,18 +69,7 @@ function testDailyEmail() {
 //return testDailyEmail();
 //return testEmail();
 
-async function test() {
-  const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
-  const msg = await testSendWeeklyNotice.checkSheetNotice(new Date(), false);
-  console.log(msg);
-  return;
-  //return testSendWeeklyNotice.initSheetData();
-  //testSendWeeklyNotice.test(0);
-  const sendSan = require('./lib/sendSanturyReminder');
-  sendSan.checkSanturyNotice(new Date(), false);
-}
 
-return test();
 
 
 sheet.appendSheet('1fcSgz1vEh5I3NS5VXCx1BHitD_AAQrmUCXNJPPSyDYk', `'Sheet1'!A1`,[[new Date(),'ZZ']]);
