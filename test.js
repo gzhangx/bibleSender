@@ -18,7 +18,7 @@ async function test() {
   sendSan.checkSanturyNotice(new Date(), false);
 }
 
-return test();
+//return test();
 
 async function testyoutube() {
   /*
