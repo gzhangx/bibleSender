@@ -24,6 +24,6 @@
     "npm-check-updates": "^12.5.4"
   },
   "engines": {
-    "node": "12.x.x"
+    "node": "17.x.x"
   }
 }
