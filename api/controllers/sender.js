@@ -101,7 +101,7 @@ function checkChannel(req, res) {
     })
 }
 
-function saveFunTypingRecord(req, res) {
+async function saveFunTypingRecord(req, res) {
     if (!req.body) {
         return res.send({ err: "no body" });    
     }
