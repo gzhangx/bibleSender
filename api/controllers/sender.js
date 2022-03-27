@@ -4,7 +4,7 @@ const sendHebrewsWeeklyEmailLib = require('../../lib/sendHebrewsWeeklyEmail');
 const sendSanturyReminder = require('../../lib/sendSanturyReminder');
 const acccn = require('../../lib/youtubeacccn');
 const ver = require('../../version');
-const sheet = require('../../lib/getSheet').createSheet();
+const sheet = require('../../lib/getSheet');
 const mail = require('../../lib/nodemailer');
 const creds = require('../../credentials.json');
 async function sender(req, res) {
@@ -118,7 +118,8 @@ function saveFunTypingRecord(req, res) {
         parts[0] = parts[0].substr(0, 2) + '###';
         return parts.join('@');
     }
-    return sheet.appendSheet('1fcSgz1vEh5I3NS5VXCx1BHitD_AAQrmUCXNJPPSyDYk', `'Sheet1'!A1`, [[new Date(), maskUsername(userName), name, wpm, wordCount, verseCount]]).then(resok => {
+    const ops = await sheet.getSheetOps('1fcSgz1vEh5I3NS5VXCx1BHitD_AAQrmUCXNJPPSyDYk');
+    return ops.append(`'Sheet1'!A1`, [[new Date(), maskUsername(userName), name, wpm, wordCount, verseCount]]).then(resok => {
         res.send({ ok: resok });
     }).catch(exc => {
         return res.send(exc);  
