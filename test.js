@@ -1,11 +1,11 @@
-const sheet = require('./lib/getSheet');
+//const sheet = require('./lib/getSheet');
 const mail = require('./lib/nodemailer');
 const moment = require('moment');
 const getData = require('./lib/getdata');
 const acccn = require('./lib/youtubeacccn');
-const gsDirect = require('./lib/googleSheetDirect');
+//const gsDirect = require('./lib/googleSheetDirect');
 
-const credentials = require('./credentials.json');
+//const credentials = require('./credentials.json');
 
 async function test() {
   const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
@@ -46,7 +46,7 @@ async function testyoutube() {
   //console.log(YYYY)
   //return console.log(sheetsInfo)
   //'UCbEh8L7DEVZDVHGcJEudy-g'
-  return acccn.recordAcccnYoutubeCntAll().then(res => {
+  return acccn.recordAcccnYoutubeCntAll('UCbEh8L7DEVZDVHGcJEudy-g').then(res => {
     console.log(res);
   }).catch(err => {
     console.log(err);
