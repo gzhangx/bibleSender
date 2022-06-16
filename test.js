@@ -9,7 +9,7 @@ const acccn = require('./lib/youtubeacccn');
 
 async function test() {
   const testSendWeeklyNotice = require('./lib/sendHebrewsWeeklyEmail');
-  const msg = await testSendWeeklyNotice.checkSheetNotice(new Date(), false);
+  const msg = await testSendWeeklyNotice.checkSheetNotice(new Date(), true);
   console.log(msg);
   return;
   //return testSendWeeklyNotice.initSheetData();
