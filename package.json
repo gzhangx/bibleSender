@@ -21,7 +21,7 @@
     "restify": "^8.6.1"
   },
   "devDependencies": {
-    "npm-check-updates": "^12.5.4"
+    "npm-check-updates": "^16.7.4"
   },
   "engines": {
     "node": "17.x.x"
