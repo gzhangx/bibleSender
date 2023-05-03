@@ -16,7 +16,7 @@
     "jimp": "^0.16.1",
     "jszip": "^3.7.1",
     "lodash": "^4.17.21",
-    "moment-timezone": "^0.5.34",
+    "moment-timezone": "^0.5.35",
     "nodemailer": "^6.7.3",
     "restify": "^8.6.1"
   },
