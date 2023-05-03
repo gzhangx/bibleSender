@@ -14,7 +14,7 @@
     "axios": "^0.26.1",
     "bluebird": "^3.7.2",
     "jimp": "^0.16.1",
-    "jszip": "^3.7.1",
+    "jszip": "^3.8.0",
     "lodash": "^4.17.21",
     "moment-timezone": "^0.5.35",
     "nodemailer": "^6.7.3",
